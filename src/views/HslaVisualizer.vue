@@ -1,7 +1,7 @@
 <template>
-	<div class="home">
-		<ColorSelector :color="hslaColorValue" @onColorSelect="changeColor"/>
-		<ColorGrid :color="hslaColorValue"/>
+	<div class="hsla-visualizer">
+		<ColorSelector :color="hsla" @onColorSelect="changeColor"/>
+		<ColorGrid :color="hsla"/>
 	</div>
 </template>
 
@@ -9,6 +9,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import ColorSelector from '@/components/ColorSelector.vue'; // @ is an alias to /src
 import ColorGrid from '@/components/ColorGrid.vue'; // @ is an alias to /src
+import { Hsla } from '@/models/Models.ts';
 
 @Component({
 	components: {
@@ -17,10 +18,18 @@ import ColorGrid from '@/components/ColorGrid.vue'; // @ is an alias to /src
 	},
 })
 export default class HslaVisualizer extends Vue {
-	private hslaColorValue: number = 0;
+	private hsla: Hsla = new Hsla(0, 0, 0, 0);
 
-	public changeColor(color: number) {
-		this.hslaColorValue = color;
+	public changeColor(color: Hsla) {
+		this.hsla = color;
 	}
 }
 </script>
+
+<style lang="scss" scoped>
+.hsla-visualizer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+</style>
