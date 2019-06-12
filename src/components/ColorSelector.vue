@@ -12,23 +12,29 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import { Hsla } from '@/models/Models.ts';
+import { Component, Vue, Prop } from "vue-property-decorator";
+import { Hsla } from "@/models/Models.ts";
 
 @Component({
-	components: {},
+	components: {}
 })
 export default class HslaVisualizer extends Vue {
 	private colors: Hsla[] = [
 		new Hsla(0, 100, 50, 1),
+		new Hsla(30, 100, 50, 1),
 		new Hsla(60, 100, 50, 1),
+		new Hsla(90, 100, 50, 1),
 		new Hsla(120, 100, 50, 1),
+		new Hsla(150, 100, 50, 1),
 		new Hsla(180, 100, 50, 1),
+		new Hsla(210, 100, 50, 1),
 		new Hsla(240, 100, 50, 1),
+		new Hsla(270, 100, 50, 1),
 		new Hsla(300, 100, 50, 1),
+		new Hsla(330, 100, 50, 1)
 	];
 	public selectColor(color: Hsla): void {
-		this.$emit('onColorSelect', color);
+		this.$emit("onColorSelect", color);
 	}
 }
 </script>
