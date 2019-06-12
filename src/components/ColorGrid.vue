@@ -1,19 +1,19 @@
 <template>
 	<div class="grid">
-		<div class="grid__cell-header"></div>
+		<!-- <div class="grid__cell-header"></div>
 		<div class="grid__cell-header">Saturation</div>
-		<div class="grid__cell-header">Light</div>
-		<template v-for="n in 11">
-			<div class="grid__cell grid__cell--percent">{{(n-1)*10}}%</div>
-			<div class="grid__cell" :style="{backgroundColor: setSaturation((n-1)*10)}"></div>
-			<div class="grid__cell" :style="{backgroundColor: setLight((n-1)*10)}"></div>
+		<div class="grid__cell-header">Light</div>-->
+		<template v-for="i in 11">
+			<template v-for="j in 11">
+				<div class="grid__cell" :style="{backgroundColor: setHslaValues((i-1)*10,(j-1)*10)}"></div>
+			</template>
 		</template>
 	</div>
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
-import { Hsla } from '@/models/Models.ts';
+import { Component, Vue, Prop } from "vue-property-decorator";
+import { Hsla } from "@/models/Models.ts";
 
 @Component({})
 export default class ColorGrid extends Vue {
@@ -27,6 +27,13 @@ export default class ColorGrid extends Vue {
 	public setLight(value: number): string {
 		return `hsla(${this.color.hue},100%,${value}%,1)`;
 	}
+	public setHslaValues(saturation: number, light: number): string {
+		const hsla: string = `hsla(${
+			this.color.hue
+		},${saturation}%,${light}%,1)`;
+
+		return hsla;
+	}
 }
 </script>
 
@@ -34,8 +41,8 @@ export default class ColorGrid extends Vue {
 $size: 3rem;
 .grid {
 	display: grid;
-	grid-template-columns: repeat(3, calc(100vw / 3));
-	grid-template-rows: repeat(12, calc(100vh / 12));
+	grid-template-columns: repeat(11, calc(50vw / 11));
+	grid-template-rows: repeat(11, calc(50vh / 11));
 
 	&__cell-header {
 		//border: 1px solid gray;
